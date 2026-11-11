@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080d18">
 <meta name="description" content="تبدیل سریع و امن یک یا چند عکس به فایل PDF با ابزارهای حرفه‌ای.">
-<title>PIXORA — Image to PDF</title>
+<title>PIXORA — تبدیل عکس به PDF</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -27,76 +27,32 @@ footer{margin-top:30px;border-top:1px solid #24334a;padding:22px 3px 0;display:f
 .toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#172b3d;border:1px solid #47715f;color:#dfffee;padding:11px 16px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:850px){.workspace{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar .sidecard:last-child{grid-column:span 2}}
 @media(max-width:560px){.shell{padding:17px 12px 40px}header{margin-bottom:30px}.privacy{font-size:9px;padding:7px 9px}.hero h2{font-size:34px}.hero p{font-size:12px}.sidebar{display:flex}.sidebar .sidecard:last-child{grid-column:auto}.features{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{padding:15px}.upload{margin:12px}.listbar{padding:0 13px 12px}.photo-grid{padding:0 12px 13px}}
-
-/* Language and theme controls */
-.header-right{flex-wrap:wrap;justify-content:flex-end}
-.header-right .btn{font-size:11px;padding:8px 11px;white-space:nowrap}
-body.light{
- --bg:#f2f6fc;--surface:#fff;--surface2:#eaf0f8;--stroke:#d5dfec;--muted:#5c6d83;
- --text:#172438;--shadow:0 18px 55px #253b5b18;
- background:radial-gradient(ellipse at 12% -5%,#d9f4f0 0,transparent 34%),radial-gradient(ellipse at 100% 20%,#e9e3ff 0,transparent 32%),var(--bg);
- color:var(--text)
-}
-body.light .panel,body.light .sidecard{background:linear-gradient(145deg,#fff,#f8faff);border-color:#d7e1ee}
-body.light .panel-head,body.light .convert-wrap,body.light footer{border-color:#dbe3ee}
-body.light .upload{background:linear-gradient(135deg,#f0f8fc,#f7f9fd);border-color:#9eb4ca}
-body.light .upload:hover,body.light .upload.over{background:#e7f7f2}
-body.light .upload-icon,body.light .side-title i{background:#e0f2f2}
-body.light .stat,body.light .feature{background:#ffffffc9;border-color:#dbe4ef;color:#34465d}
-body.light .counter,body.light .eyebrow{background:#edf6ff;border-color:#c9dff0;color:#315d7d}
-body.light .field label,body.light .checkrow{color:#42546b}
-body.light .field select,body.light .field input[type=text],body.light .seg button{background:#fff;border-color:#cbd7e5;color:#24364d}
-body.light .seg button.active{background:#e2f6ef;border-color:#65c5a6;color:#17644d}
-body.light .photo{background:#f4f7fb;border-color:#d4deea}
-body.light .photo img{background:#e8edf4}
-body.light .filename{color:#35465d}
-body.light .empty{border-color:#dbe4ef;color:#63748a}
-body.light .soft{background:#edf2f8;border-color:#ccd8e6;color:#263950}
-body.light .remove{background:#fff0f4;border-color:#efc4d1;color:#a33c5b}
-body.light .privacy{background:#e8f7f1;border-color:#b9e3d4;color:#23634e}
-body.light .toast{background:#fff;border-color:#9acdb7;color:#20533f;box-shadow:0 8px 30px #0002}
-body.light .index{background:#ffffffed;border-color:#c4d0df;color:#263950}
-body.light .progress{background:#dce5ef}
-@media(max-width:560px){
- header{align-items:flex-start;gap:10px}
- .header-right{gap:6px}
- .header-right .btn{font-size:10px;padding:7px 8px}
- .privacy{display:none}
-}
-[dir="ltr"] body{text-align:left}
-[dir="ltr"] .filename{direction:ltr;text-align:left}
-[dir="ltr"] .index{right:auto;left:7px}
-[dir="ltr"] .checkrow{flex-direction:row}
 </style>
 </head>
 <body>
 <div class="shell">
 <header>
- <div class="brand"><div class="brandmark">PX</div><div><h1>PIXORA</h1><small id="brandSubtitle">IMAGE TO PDF STUDIO</small></div></div>
- <div class="header-right">
-   <button class="btn soft" id="languageToggle" type="button" aria-label="Change language">🇬🇧 English</button>
-   <button class="btn soft" id="themeToggle" type="button" aria-label="Toggle color theme">☀️ حالت روز</button>
-   <span class="privacy" id="privacyBadge">✦ خصوصی و امن · بدون آپلود</span>
-  </div>
+ <div class="brand"><div class="brandmark">PX</div><div><h1>PIXORA</h1><small>IMAGE TO PDF STUDIO</small></div></div>
+ <div class="header-right"><span class="privacy">✦ خصوصی و امن · بدون آپلود</span></div>
 </header>
 <section class="hero">
- <div class="eyebrow"><span class="dot"></span><span id="eyebrowText">ابزار هوشمند تبدیل تصویر</span></div>
- <h2 id="heroTitle">عکس‌هات، یک PDF <span class="gradient">حرفه‌ای</span></h2>
- <p id="heroDescription">چند عکس را وارد کن، مرتب کن، تنظیمات دلخواهت را انتخاب کن و در چند ثانیه یک PDF تمیز تحویل بگیر.</p>
- <div class="stats"><div class="stat"><b>∞</b> <span data-fa="چندین تصویر" data-en="Multiple images">چندین تصویر</span></div><div class="stat"><b>100%</b> <span data-fa="پردازش محلی" data-en="Local processing">پردازش محلی</span></div><div class="stat"><b>1</b> <span data-fa="کلیک تا PDF" data-en="click PDF export">کلیک تا PDF</span></div></div>
+ <div class="eyebrow"><span class="dot"></span> ابزار هوشمند تبدیل تصویر</div>
+ <h2>عکس‌هات، یک PDF <span class="gradient">حرفه‌ای</span></h2>
+ <p>چند عکس را وارد کن، مرتب کن، تنظیمات دلخواهت را انتخاب کن و در چند ثانیه یک PDF تمیز تحویل بگیر.</p>
+ <div class="stats"><div class="stat"><b>∞</b> چندین تصویر</div><div class="stat"><b>100%</b> پردازش محلی</div><div class="stat"><b>1 کلیک</b> خروجی PDF</div></div>
 </section>
 <main class="workspace">
 <section class="panel">
- <div class="panel-head"><div><h3 id="workspaceTitle">فضای ساخت PDF</h3><div class="sub" id="workspaceSub">تصاویرت را اضافه و مدیریت کن</div></div><span class="counter" id="counter">۰ تصویر</span></div>
+ <div class="panel-head"><div><h3>فضای ساخت PDF</h3><div class="sub">تصاویرت را اضافه و مدیریت کن</div></div><span class="counter" id="counter">۰ تصویر</span></div>
  <div class="upload" id="drop">
-  <div class="upload-icon">✧</div><strong id="dropTitle">تصاویر را اینجا رها کن</strong>
-  <p id="dropDescription">یا از دستگاهت انتخاب کن · JPG / PNG / WEBP</p>
+  <div class="upload-icon">✧</div><strong>تصاویر را اینجا رها کن</strong>
+  <p>یا از دستگاهت انتخاب کن · JPG / PNG / WEBP</p>
   <button class="btn primary" id="choose">＋ انتخاب تصاویر</button>
   <input class="fileinput" id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple>
  </div>
- <div class="listbar"><div><strong id="listTitle">فهرست تصاویر</strong><br><span id="listSub">با فلش‌ها ترتیب صفحات را تغییر بده</span></div><div class="tools"><button class="btn soft" id="sort" disabled>مرتب‌سازی نام</button><button class="btn remove" id="clear" disabled>حذف همه</button></div></div>
+ <div class="listbar"><div><strong>فهرست تصاویر</strong><br><span>با فلش‌ها ترتیب صفحات را تغییر بده</span></div><div class="tools"><button class="btn soft" id="sort" disabled>مرتب‌سازی نام</button><button class="btn remove" id="clear" disabled>حذف همه</button></div></div>
  <div class="photo-grid" id="grid"></div>
- <div class="empty" id="empty"><span class="big">▧</span><span id="emptyText">هنوز تصویری انتخاب نکردی.<br>اولین عکس را اضافه کن تا شروع کنیم!</span></div>
+ <div class="empty" id="empty"><span class="big">▧</span>هنوز تصویری انتخاب نکردی.<br>اولین عکس را اضافه کن تا شروع کنیم!</div>
  <div class="convert-wrap">
   <button class="btn primary convert" id="convert" disabled>✦ ساخت PDF و دانلود</button>
   <div class="progress" id="progress"><div id="bar"></div></div><div class="status" id="status" aria-live="polite"></div>
@@ -104,18 +60,18 @@ body.light .progress{background:#dce5ef}
 </section>
 <aside class="sidebar">
  <section class="sidecard">
-  <div class="side-title"><i>⚙</i> <span id="pageSettingsTitle">تنظیمات صفحه</span></div>
-  <div class="field"><label id="paperLabel">اندازه کاغذ</label><select id="size"><option value="a4">A4 — استاندارد</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="fit">اندازه متناسب با عکس</option></select></div>
-  <div class="field"><label id="orientationLabel">جهت صفحه</label><div class="seg" id="orientation"><button data-value="portrait" class="active">عمودی</button><button data-value="landscape">افقی</button><button data-value="auto">هوشمند</button><button data-value="auto">خودکار</button></div></div>
-  <div class="field"><label id="marginLabel">حاشیه صفحه</label><select id="margin"><option value="0">بدون حاشیه</option><option value="8">کم</option><option value="15" selected>معمولی</option><option value="25">زیاد</option></select></div>
-  <div class="field"><label id="fitLabel">نحوه قرارگیری عکس</label><select id="fit"><option value="contain">نمایش کامل عکس</option><option value="cover">پر کردن صفحه (برش احتمالی)</option></select></div>
+  <div class="side-title"><i>⚙</i> تنظیمات صفحه</div>
+  <div class="field"><label>اندازه کاغذ</label><select id="size"><option value="a4">A4 — استاندارد</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="fit">اندازه متناسب با عکس</option></select></div>
+  <div class="field"><label>جهت صفحه</label><div class="seg" id="orientation"><button data-value="portrait" class="active">عمودی</button><button data-value="landscape">افقی</button><button data-value="auto">هوشمند</button><button data-value="auto">خودکار</button></div></div>
+  <div class="field"><label>حاشیه صفحه</label><select id="margin"><option value="0">بدون حاشیه</option><option value="8">کم</option><option value="15" selected>معمولی</option><option value="25">زیاد</option></select></div>
+  <div class="field"><label>نحوه قرارگیری عکس</label><select id="fit"><option value="contain">نمایش کامل عکس</option><option value="cover">پر کردن صفحه (برش احتمالی)</option></select></div>
  </section>
  <section class="sidecard">
-  <div class="side-title"><i>✧</i> <span id="outputSettingsTitle">تنظیمات خروجی</span></div>
-  <div class="field"><label id="filenameLabel">نام فایل PDF</label><input id="filename" type="text" value="pixora-document" maxlength="60" dir="auto"></div>
-  <div class="field"><label id="qualityLabel">کیفیت تصاویر</label><select id="quality"><option value=".98">بالاترین کیفیت</option><option value=".88" selected>متعادل و پیشنهادی</option><option value=".70">حجم کمتر</option></select></div>
-  <label class="checkrow"><span id="pageNumbersLabel">شماره صفحه در پایین PDF</span><input type="checkbox" id="pageNumbers"></label>
-  <label class="checkrow"><span id="dateStampLabel">تاریخ ساخت در پایین صفحه</span><input type="checkbox" id="dateStamp"></label>
+  <div class="side-title"><i>✧</i> تنظیمات خروجی</div>
+  <div class="field"><label>نام فایل PDF</label><input id="filename" type="text" value="pixora-document" maxlength="60" dir="auto"></div>
+  <div class="field"><label>کیفیت تصاویر</label><select id="quality"><option value=".98">بالاترین کیفیت</option><option value=".88" selected>متعادل و پیشنهادی</option><option value=".70">حجم کمتر</option></select></div>
+  <label class="checkrow"><span>شماره صفحه در پایین PDF</span><input type="checkbox" id="pageNumbers"></label>
+  <label class="checkrow"><span>تاریخ ساخت در پایین صفحه</span><input type="checkbox" id="dateStamp"></label>
  </section>
 </aside>
 </main>
@@ -124,107 +80,27 @@ body.light .progress{background:#dce5ef}
  <div class="feature"><span class="ico">↕️</span><div><b>مدیریت ترتیب صفحات</b><small>جابجایی، چرخش و حذف هر تصویر به‌صورت جداگانه.</small></div></div>
  <div class="feature"><span class="ico">⚡</span><div><b>خروجی قابل تنظیم</b><small>اندازه صفحه، کیفیت و حاشیه دلخواه خودت را انتخاب کن.</small></div></div>
 </section>
-<footer><span id="footerCopy">© 2026 PIXORA · ساخته‌شده برای تبدیل ساده‌تر</span><span><span id="footerContact">پشتیبانی و پیشنهادها:</span> <a class="contact" href="mailto:cooperx404.github.@gmail.com">cooperx404.github.@gmail.com</a></span></footer>
+<footer><span>© 2026 PIXORA · ساخته‌شده برای تبدیل ساده‌تر</span><span>پشتیبانی و پیشنهادها: <a class="contact" href="mailto:cooperx404.github.@gmail.com">cooperx404.github.@gmail.com</a></span></footer>
 </div>
 <div class="toast" id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-
-const translations={
- fa:{
-  privacy:'✦ خصوصی و امن · بدون آپلود',day:'☀️ حالت روز',night:'🌙 حالت شب',language:'🇬🇧 English',
-  brand:'IMAGE TO PDF STUDIO',eyebrow:'ابزار هوشمند تبدیل تصویر',hero:'عکس‌هات، یک PDF <span class="gradient">حرفه‌ای</span>',
-  description:'چند عکس را وارد کن، مرتب کن، تنظیمات دلخواهت را انتخاب کن و در چند ثانیه یک PDF تمیز تحویل بگیر.',
-  workspace:'فضای ساخت PDF',workspaceSub:'تصاویرت را اضافه و مدیریت کن',dropTitle:'تصاویر را اینجا رها کن',
-  dropDescription:'یا از دستگاهت انتخاب کن · JPG / PNG / WEBP',choose:'＋ انتخاب تصاویر',listTitle:'فهرست تصاویر',
-  listSub:'با فلش‌ها ترتیب صفحات را تغییر بده',sort:'مرتب‌سازی نام',clear:'حذف همه',
-  empty:'هنوز تصویری انتخاب نکردی.<br>اولین عکس را اضافه کن تا شروع کنیم!',convert:'✦ ساخت PDF و دانلود',
-  pageSettings:'تنظیمات صفحه',outputSettings:'تنظیمات خروجی',paper:'اندازه کاغذ',orientation:'جهت صفحه',
-  margin:'حاشیه صفحه',fit:'نحوه قرارگیری عکس',filename:'نام فایل PDF',quality:'کیفیت تصاویر',
-  pageNumbers:'شماره صفحه در پایین PDF',dateStamp:'تاریخ ساخت در پایین صفحه',
-  footer:'© 2026 PIXORA · ساخته‌شده برای تبدیل ساده‌تر',contact:'پشتیبانی و پیشنهادها:',
-  paperOptions:['A4 — استاندارد','Letter','Legal','اندازه متناسب با عکس'],
-  orientationOptions:['عمودی','افقی','هوشمند','خودکار'],
-  marginOptions:['بدون حاشیه','کم','معمولی','زیاد'],
-  fitOptions:['نمایش کامل عکس','پر کردن صفحه (برش احتمالی)'],
-  qualityOptions:['بالاترین کیفیت','متعادل و پیشنهادی','حجم کمتر'],
-  selected:n=>`${n} تصویر`,page:n=>`صفحه ${n}`,unsupported:'فرمت تصویر پشتیبانی نمی‌شود.',
-  added:n=>`${n} تصویر اضافه شد.`,cleared:'فهرست تصاویر پاک شد.',sorted:'تصاویر بر اساس نام مرتب شدند.',
-  libraryMissing:tr('libraryMissing'),
-  preparing:tr('preparing'),building:(a,b)=>`در حال ساخت صفحه ${a} از ${b}...`,
-  ready:tr('ready'),success:tr('success'),
-  failed:tr('failed'),failedToast:tr('failedToast')
- },
- en:{
-  privacy:'✦ Private & secure · No upload',day:'☀️ Light Mode',night:'🌙 Dark Mode',language:'🇮🇷 فارسی',
-  brand:'IMAGE TO PDF STUDIO',eyebrow:'Smart image conversion tool',hero:'Your photos, one <span class="gradient">professional</span> PDF',
-  description:'Add multiple photos, arrange them, choose your settings, and create a polished PDF in seconds.',
-  workspace:'PDF Workspace',workspaceSub:'Add and manage your images',dropTitle:'Drop images here',
-  dropDescription:'Or choose from your device · JPG / PNG / WEBP',choose:'＋ Choose Images',listTitle:'Image List',
-  listSub:'Use the arrows to change page order',sort:'Sort by name',clear:'Remove all',
-  empty:'No images selected yet.<br>Add your first image to get started!',convert:'✦ Create & Download PDF',
-  pageSettings:'Page Settings',outputSettings:'Output Settings',paper:'Paper size',orientation:'Orientation',
-  margin:'Page margin',fit:'Image placement',filename:'PDF file name',quality:'Image quality',
-  pageNumbers:'Page numbers at the bottom',dateStamp:'Creation date at the bottom',
-  footer:'© 2026 PIXORA · Made to make conversion easier',contact:'Support & suggestions:',
-  paperOptions:['A4 — Standard','Letter','Legal','Fit to image'],
-  orientationOptions:['Portrait','Landscape','Smart','Auto'],
-  marginOptions:['No margin','Small','Normal','Large'],
-  fitOptions:['Fit entire image','Fill page (may crop)'],
-  qualityOptions:['Highest quality','Balanced (recommended)','Smaller file'],
-  selected:n=>`${n} image(s)`,page:n=>`Page ${n}`,unsupported:'This image format is not supported.',
-  added:n=>`${n} image(s) added.`,cleared:'Image list cleared.',sorted:'Images sorted by name.',
-  libraryMissing:'PDF library did not load; check your internet connection.',
-  preparing:'Preparing images...',building:(a,b)=>`Creating page ${a} of ${b}...`,
-  ready:'PDF is ready; download started ✨',success:'PDF created successfully.',
-  failed:'Could not create PDF. Please try again.',failedToast:'PDF creation failed.'
- }
-};
-let currentLanguage=localStorage.getItem('pixora-language')||'fa';
-let currentTheme=localStorage.getItem('pixora-theme')||'dark';
-function tr(key,...args){const value=translations[currentLanguage][key];return typeof value==='function'?value(...args):value}
-function setLanguage(lang){
- currentLanguage=lang;localStorage.setItem('pixora-language',lang);
- document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
- const ids={privacyBadge:'privacy',brandSubtitle:'brand',eyebrowText:'eyebrow',heroTitle:'hero',heroDescription:'description',
- workspaceTitle:'workspace',workspaceSub:'workspaceSub',dropTitle:'dropTitle',dropDescription:'dropDescription',
- choose:'choose',listTitle:'listTitle',listSub:'listSub',sort:'sort',clear:'clear',emptyText:'empty',
- convert:'convert',pageSettingsTitle:'pageSettings',outputSettingsTitle:'outputSettings',
- paperLabel:'paper',orientationLabel:'orientation',marginLabel:'margin',fitLabel:'fit',
- filenameLabel:'filename',qualityLabel:'quality',pageNumbersLabel:'pageNumbers',dateStampLabel:'dateStamp',
- footerCopy:'footer',footerContact:'contact'};
- Object.entries(ids).forEach(([id,key])=>{const el=$(id);if(el)el.innerHTML=tr(key)});
- const selectOptions={size:'paperOptions',margin:'marginOptions',fit:'fitOptions',quality:'qualityOptions'};
- Object.entries(selectOptions).forEach(([id,key])=>[...$(id).options].forEach((o,i)=>o.textContent=tr(key)[i]));
- [...$('orientation').querySelectorAll('button')].forEach((b,i)=>b.textContent=tr('orientationOptions')[i]);
- $('languageToggle').textContent=tr('language');updateThemeButton();
- render();
-}
-function setTheme(theme){
- currentTheme=theme;localStorage.setItem('pixora-theme',theme);
- document.body.classList.toggle('light',theme==='light');
- $('themeToggle').textContent=theme==='dark'?translations[currentLanguage].day:translations[currentLanguage].night;
-}
-function updateThemeButton(){setTheme(currentTheme)}
-$('languageToggle').addEventListener('click',()=>setLanguage(currentLanguage==='fa'?'en':'fa'));
-$('themeToggle').addEventListener('click',()=>setTheme(currentTheme==='dark'?'light':'dark'));
-
 const $=id=>document.getElementById(id),input=$('files'),drop=$('drop');let photos=[],orientation='portrait';
-const fa=n=>currentLanguage==='fa'?String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]):String(n);
+const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 function toast(s){const t=$('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
 $('choose').onclick=e=>{e.stopPropagation();input.click()};drop.onclick=e=>{if(e.target.id!=='choose')input.click()};
 input.onchange=e=>{addFiles(e.target.files);input.value=''};
 ['dragenter','dragover'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.add('over')}));
 ['dragleave','drop'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.remove('over')}));
 drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
-function addFiles(list){let arr=[...list].filter(f=>['image/jpeg','image/png','image/webp'].includes(f.type));if(!arr.length){toast(tr('unsupported'));return}
- arr.forEach(file=>photos.push({file,url:URL.createObjectURL(file),name:file.name,rotation:0}));render();toast(tr('added',fa(arr.length)))}
+function addFiles(list){let arr=[...list].filter(f=>['image/jpeg','image/png','image/webp'].includes(f.type));if(!arr.length){toast('فرمت تصویر پشتیبانی نمی‌شود.');return}
+ arr.forEach(file=>photos.push({file,url:URL.createObjectURL(file),name:file.name,rotation:0}));render();toast(fa(arr.length)+' تصویر اضافه شد.')}
 function render(){
- $('grid').innerHTML='';$('empty').style.display=photos.length?'none':'block';$('counter').textContent=fa(photos.length)+(currentLanguage==='fa'?' تصویر':' image(s)');
+ $('grid').innerHTML='';$('empty').style.display=photos.length?'none':'block';$('counter').textContent=fa(photos.length)+' تصویر';
  ['convert','clear','sort'].forEach(id=>$(id).disabled=!photos.length);
  photos.forEach((p,i)=>{let card=document.createElement('article');card.className='photo';
  let img=document.createElement('img');img.src=p.url;img.style.transform=`rotate(${p.rotation}deg)`;
- let idx=document.createElement('span');idx.className='index';idx.textContent=tr('page',fa(i+1));
+ let idx=document.createElement('span');idx.className='index';idx.textContent='صفحه '+fa(i+1);
  let name=document.createElement('div');name.className='filename';name.textContent=p.name;name.title=p.name;
  let actions=document.createElement('div');actions.className='photo-actions';
  const mk=(label,fn,disabled=false,cls='soft')=>{let b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.disabled=disabled;b.onclick=fn;return b};
@@ -232,14 +108,14 @@ function render(){
  card.append(img,idx,name,actions);$('grid').append(card)});
 }
 function move(i,d){let j=i+d;if(j<0||j>=photos.length)return;[photos[i],photos[j]]=[photos[j],photos[i]];render()}
-$('clear').onclick=()=>{photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];render();toast(tr('cleared'))};
-$('sort').onclick=()=>{photos.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));render();toast(tr('sorted'))};
+$('clear').onclick=()=>{photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];render();toast('فهرست تصاویر پاک شد.')};
+$('sort').onclick=()=>{photos.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));render();toast('تصاویر بر اساس نام مرتب شدند.')};
 $('orientation').querySelectorAll('button').forEach(b=>b.onclick=()=>{orientation=b.dataset.value;$('orientation').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b))});
 function loadImage(src){return new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=src})}
 function makeCanvas(img,rotation,quality){let swap=rotation%180!==0,c=document.createElement('canvas');c.width=swap?img.height:img.width;c.height=swap?img.width:img.height;let ctx=c.getContext('2d');ctx.translate(c.width/2,c.height/2);ctx.rotate(rotation*Math.PI/180);ctx.drawImage(img,-img.width/2,-img.height/2);return {data:c.toDataURL('image/jpeg',quality),w:c.width,h:c.height}}
 $('convert').onclick=async()=>{
- if(!photos.length)return;if(!window.jspdf){$('status').textContent=tr('libraryMissing');return}
- let btn=$('convert'),progress=$('progress'),bar=$('bar');btn.disabled=true;progress.style.display='block';$('status').textContent=tr('preparing');
+ if(!photos.length)return;if(!window.jspdf){$('status').textContent='کتابخانه PDF بارگذاری نشده؛ اتصال اینترنت را بررسی کن.';return}
+ let btn=$('convert'),progress=$('progress'),bar=$('bar');btn.disabled=true;progress.style.display='block';$('status').textContent='در حال آماده‌سازی تصاویر...';
  try{
  const {jsPDF}=window.jspdf,size=$('size').value,margin=Number($('margin').value),quality=Number($('quality').value),fit=$('fit').value;
  let pdf=null;
@@ -262,13 +138,12 @@ $('convert').onclick=async()=>{
    pdf.addImage(out.toDataURL('image/jpeg',quality),'JPEG',margin,margin,uw,uh,undefined,'FAST');
   }else pdf.addImage(c.data,'JPEG',x,y,w,h,undefined,'FAST');
   if($('pageNumbers').checked||$('dateStamp').checked){pdf.setFontSize(8);pdf.setTextColor(125,139,158);let label=[];if($('pageNumbers').checked)label.push(`${i+1} / ${photos.length}`);if($('dateStamp').checked)label.push(new Date().toLocaleDateString('fa-IR'));pdf.text(label.join('  •  '),pw/2,ph-4,{align:'center'});}
-  bar.style.width=((i+1)/photos.length*100)+'%';$('status').textContent=tr('building',fa(i+1),fa(photos.length));
+  bar.style.width=((i+1)/photos.length*100)+'%';$('status').textContent=`در حال ساخت صفحه ${fa(i+1)} از ${fa(photos.length)}...`;
  }
- let filename=$('filename').value.trim().replace(/[\\/:*?"<>|]/g,'-')||'pixora-document';pdf.save(filename+'.pdf');$('status').textContent=tr('ready');toast(tr('success'));
- }catch(err){console.error(err);$('status').textContent=tr('failed');toast(tr('failedToast'))}
+ let filename=$('filename').value.trim().replace(/[\\/:*?"<>|]/g,'-')||'pixora-document';pdf.save(filename+'.pdf');$('status').textContent='PDF آماده شد؛ دانلود شروع شد ✨';toast('فایل PDF با موفقیت ساخته شد.');
+ }catch(err){console.error(err);$('status').textContent='خطا در ساخت PDF. دوباره تلاش کن.';toast('ساخت PDF ناموفق بود.')}
  finally{btn.disabled=!photos.length;setTimeout(()=>{progress.style.display='none';bar.style.width='0'},1800)}
 };
-setLanguage(currentLanguage);
-setTheme(currentTheme);
+render();
 </script>
 </body></html>
