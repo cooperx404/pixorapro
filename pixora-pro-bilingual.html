@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<meta name="description" content="تبدیل سریع و امن یک یا چند عکس به فایل PDF با ابزارهای حرفه‌ای.">
+<title>PIXORA — Image to PDF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080d18;--surface:#101a2b;--surface2:#152238;--stroke:#263750;--muted:#91a2bb;--text:#f3f7ff;--mint:#66f0c1;--blue:#69baff;--pink:#ff78a8;--shadow:0 24px 80px #0007}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% -5%,#153b4b 0,transparent 34%),radial-gradient(ellipse at 100% 20%,#211b45 0,transparent 32%),var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1180px;margin:auto;padding:24px 20px 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:44px}.brand{display:flex;align-items:center;gap:12px}.brandmark{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(140deg,var(--mint),var(--blue));color:#07151b;font-weight:900;font-size:19px;box-shadow:0 8px 30px #66f0c133}.brand h1{font-size:19px;letter-spacing:2px;margin:0;font-weight:900}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1px}.header-right{display:flex;gap:9px;align-items:center}.privacy{font-size:11px;color:#b7f8df;border:1px solid #285b51;background:#0c2826;padding:8px 12px;border-radius:30px}
+.hero{max-width:760px;margin:0 auto 30px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:7px;border:1px solid #31516b;background:#10243a;color:#a8dcff;border-radius:30px;padding:7px 13px;font-size:11px}.dot{width:7px;height:7px;background:var(--mint);border-radius:50%;box-shadow:0 0 12px var(--mint)}.hero h2{font-size:clamp(32px,6vw,57px);line-height:1.3;margin:17px 0 12px;font-weight:900;letter-spacing:-1.5px}.gradient{background:linear-gradient(90deg,var(--mint),var(--blue),#c4a5ff);color:transparent;background-clip:text}.hero p{color:var(--muted);font-size:14px;line-height:2;margin:0}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}.stat{font-size:11px;color:#b9c8dc;background:#111d2e;border:1px solid #25374e;border-radius:12px;padding:8px 12px}.stat b{color:var(--mint);margin-left:4px}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}.panel{background:linear-gradient(145deg,#121e30f5,#0e1727f5);border:1px solid var(--stroke);border-radius:23px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:19px 21px;border-bottom:1px solid #26364b;display:flex;justify-content:space-between;align-items:center;gap:12px}.panel-head h3{margin:0;font-size:15px}.sub{font-size:11px;color:var(--muted);margin-top:4px}.counter{border:1px solid #31516b;background:#10243a;color:#bde8ff;padding:6px 10px;border-radius:30px;font-size:11px;white-space:nowrap}
+.upload{margin:18px;border:1.5px dashed #42617d;border-radius:18px;padding:28px 15px;text-align:center;background:linear-gradient(135deg,#102235,#101a2a);transition:.2s;cursor:pointer}.upload:hover,.upload.over{border-color:var(--mint);background:#102b30}.upload-icon{width:54px;height:54px;margin:0 auto 12px;border-radius:17px;background:#17374a;display:grid;place-items:center;font-size:25px}.upload strong{display:block;font-size:15px}.upload p{font-size:11px;color:var(--muted);margin:7px 0 14px}.btn{border:0;border-radius:12px;padding:10px 15px;font-weight:800;font-size:12px;transition:.18s}.btn:hover{transform:translateY(-1px);filter:brightness(1.08)}.primary{background:linear-gradient(110deg,var(--mint),#8bdcf9);color:#071a20;box-shadow:0 8px 22px #66f0c122}.soft{background:#1d2d44;border:1px solid #344b68;color:#e4edfa}.remove{background:#382235;border:1px solid #684057;color:#ffb6cb}.fileinput{display:none}
+.listbar{display:flex;justify-content:space-between;align-items:center;padding:0 19px 13px;gap:10px}.listbar strong{font-size:13px}.listbar span{font-size:11px;color:var(--muted)}.tools{display:flex;gap:7px;flex-wrap:wrap}.tools .btn{padding:7px 10px;font-size:10px}
+.photo-grid{padding:0 18px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:11px}.empty{margin:0 18px 18px;padding:30px 12px;text-align:center;border:1px solid #25374d;border-radius:15px;color:var(--muted);font-size:12px;line-height:2}.empty .big{font-size:28px;display:block;margin-bottom:7px}.photo{min-width:0;position:relative;background:#0a1321;border:1px solid #2a3b53;border-radius:14px;overflow:hidden}.photo img{width:100%;height:132px;display:block;object-fit:contain;background:#080f1a}.index{position:absolute;top:7px;right:7px;background:#07111de8;border:1px solid #405571;border-radius:20px;padding:3px 8px;font-size:10px}.filename{font-size:10px;color:#c7d3e2;padding:8px 8px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr;text-align:left}.photo-actions{display:flex;gap:5px;padding:0 7px 8px}.photo-actions button{flex:1;padding:6px 2px;border-radius:8px;font-size:11px}.photo-actions button:disabled{opacity:.3;cursor:not-allowed}
+.sidebar{display:flex;flex-direction:column;gap:14px}.sidecard{background:linear-gradient(145deg,#142238,#101a2a);border:1px solid var(--stroke);border-radius:20px;padding:18px}.side-title{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14px;margin-bottom:15px}.side-title i{font-style:normal;width:30px;height:30px;border-radius:10px;background:#1c3b48;display:grid;place-items:center}.field{margin-bottom:13px}.field:last-child{margin-bottom:0}.field label{display:block;font-size:11px;color:#aebed1;margin-bottom:7px}.field select,.field input[type=text]{width:100%;background:#0a1423;border:1px solid #30435d;border-radius:10px;color:#edf5ff;padding:10px 11px;font-size:12px;outline:none}.field select:focus,.field input:focus{border-color:var(--mint)}.seg{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.seg button{background:#0a1423;border:1px solid #30435d;color:#b7c5d8;border-radius:9px;padding:8px 5px;font-size:11px}.seg button.active{background:#173b3b;border-color:#55cda9;color:#a8ffe0}.checkrow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:#bdcadd;margin-top:13px}.checkrow input{accent-color:#66f0c1;width:16px;height:16px}
+.convert-wrap{padding:17px;border-top:1px solid #26364b;background:#0c1625}.convert{width:100%;padding:15px;font-size:14px}.convert:disabled{opacity:.35;cursor:not-allowed;transform:none}.progress{height:5px;background:#23334a;border-radius:20px;margin-top:12px;overflow:hidden;display:none}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--mint),var(--blue));transition:width .2s}.status{font-size:11px;color:var(--mint);min-height:18px;margin-top:9px;text-align:center}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.feature{border:1px solid #25364d;background:#101b2b99;border-radius:15px;padding:14px;display:flex;gap:10px;align-items:flex-start}.feature .ico{font-size:20px}.feature b{font-size:11px;display:block}.feature small{font-size:10px;color:var(--muted);line-height:1.7;display:block;margin-top:3px}
+footer{margin-top:30px;border-top:1px solid #24334a;padding:22px 3px 0;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;color:#8192aa;font-size:11px}.contact{color:#b7f7df;text-decoration:none;border-bottom:1px dashed #4b9c85;padding-bottom:2px}.contact:hover{color:white}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#172b3d;border:1px solid #47715f;color:#dfffee;padding:11px 16px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.workspace{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar .sidecard:last-child{grid-column:span 2}}
+@media(max-width:560px){.shell{padding:17px 12px 40px}header{margin-bottom:30px}.privacy{font-size:9px;padding:7px 9px}.hero h2{font-size:34px}.hero p{font-size:12px}.sidebar{display:flex}.sidebar .sidecard:last-child{grid-column:auto}.features{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.panel-head{padding:15px}.upload{margin:12px}.listbar{padding:0 13px 12px}.photo-grid{padding:0 12px 13px}}
+
+/* Language and theme controls */
+.header-right{flex-wrap:wrap;justify-content:flex-end}
+.header-right .btn{font-size:11px;padding:8px 11px;white-space:nowrap}
+body.light{
+ --bg:#f2f6fc;--surface:#fff;--surface2:#eaf0f8;--stroke:#d5dfec;--muted:#5c6d83;
+ --text:#172438;--shadow:0 18px 55px #253b5b18;
+ background:radial-gradient(ellipse at 12% -5%,#d9f4f0 0,transparent 34%),radial-gradient(ellipse at 100% 20%,#e9e3ff 0,transparent 32%),var(--bg);
+ color:var(--text)
+}
+body.light .panel,body.light .sidecard{background:linear-gradient(145deg,#fff,#f8faff);border-color:#d7e1ee}
+body.light .panel-head,body.light .convert-wrap,body.light footer{border-color:#dbe3ee}
+body.light .upload{background:linear-gradient(135deg,#f0f8fc,#f7f9fd);border-color:#9eb4ca}
+body.light .upload:hover,body.light .upload.over{background:#e7f7f2}
+body.light .upload-icon,body.light .side-title i{background:#e0f2f2}
+body.light .stat,body.light .feature{background:#ffffffc9;border-color:#dbe4ef;color:#34465d}
+body.light .counter,body.light .eyebrow{background:#edf6ff;border-color:#c9dff0;color:#315d7d}
+body.light .field label,body.light .checkrow{color:#42546b}
+body.light .field select,body.light .field input[type=text],body.light .seg button{background:#fff;border-color:#cbd7e5;color:#24364d}
+body.light .seg button.active{background:#e2f6ef;border-color:#65c5a6;color:#17644d}
+body.light .photo{background:#f4f7fb;border-color:#d4deea}
+body.light .photo img{background:#e8edf4}
+body.light .filename{color:#35465d}
+body.light .empty{border-color:#dbe4ef;color:#63748a}
+body.light .soft{background:#edf2f8;border-color:#ccd8e6;color:#263950}
+body.light .remove{background:#fff0f4;border-color:#efc4d1;color:#a33c5b}
+body.light .privacy{background:#e8f7f1;border-color:#b9e3d4;color:#23634e}
+body.light .toast{background:#fff;border-color:#9acdb7;color:#20533f;box-shadow:0 8px 30px #0002}
+body.light .index{background:#ffffffed;border-color:#c4d0df;color:#263950}
+body.light .progress{background:#dce5ef}
+@media(max-width:560px){
+ header{align-items:flex-start;gap:10px}
+ .header-right{gap:6px}
+ .header-right .btn{font-size:10px;padding:7px 8px}
+ .privacy{display:none}
+}
+[dir="ltr"] body{text-align:left}
+[dir="ltr"] .filename{direction:ltr;text-align:left}
+[dir="ltr"] .index{right:auto;left:7px}
+[dir="ltr"] .checkrow{flex-direction:row}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <div class="brand"><div class="brandmark">PX</div><div><h1>PIXORA</h1><small id="brandSubtitle">IMAGE TO PDF STUDIO</small></div></div>
+ <div class="header-right">
+   <button class="btn soft" id="languageToggle" type="button" aria-label="Change language">🇬🇧 English</button>
+   <button class="btn soft" id="themeToggle" type="button" aria-label="Toggle color theme">☀️ حالت روز</button>
+   <span class="privacy" id="privacyBadge">✦ خصوصی و امن · بدون آپلود</span>
+  </div>
+</header>
+<section class="hero">
+ <div class="eyebrow"><span class="dot"></span><span id="eyebrowText">ابزار هوشمند تبدیل تصویر</span></div>
+ <h2 id="heroTitle">عکس‌هات، یک PDF <span class="gradient">حرفه‌ای</span></h2>
+ <p id="heroDescription">چند عکس را وارد کن، مرتب کن، تنظیمات دلخواهت را انتخاب کن و در چند ثانیه یک PDF تمیز تحویل بگیر.</p>
+ <div class="stats"><div class="stat"><b>∞</b> <span data-fa="چندین تصویر" data-en="Multiple images">چندین تصویر</span></div><div class="stat"><b>100%</b> <span data-fa="پردازش محلی" data-en="Local processing">پردازش محلی</span></div><div class="stat"><b>1</b> <span data-fa="کلیک تا PDF" data-en="click PDF export">کلیک تا PDF</span></div></div>
+</section>
+<main class="workspace">
+<section class="panel">
+ <div class="panel-head"><div><h3 id="workspaceTitle">فضای ساخت PDF</h3><div class="sub" id="workspaceSub">تصاویرت را اضافه و مدیریت کن</div></div><span class="counter" id="counter">۰ تصویر</span></div>
+ <div class="upload" id="drop">
+  <div class="upload-icon">✧</div><strong id="dropTitle">تصاویر را اینجا رها کن</strong>
+  <p id="dropDescription">یا از دستگاهت انتخاب کن · JPG / PNG / WEBP</p>
+  <button class="btn primary" id="choose">＋ انتخاب تصاویر</button>
+  <input class="fileinput" id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+ </div>
+ <div class="listbar"><div><strong id="listTitle">فهرست تصاویر</strong><br><span id="listSub">با فلش‌ها ترتیب صفحات را تغییر بده</span></div><div class="tools"><button class="btn soft" id="sort" disabled>مرتب‌سازی نام</button><button class="btn remove" id="clear" disabled>حذف همه</button></div></div>
+ <div class="photo-grid" id="grid"></div>
+ <div class="empty" id="empty"><span class="big">▧</span><span id="emptyText">هنوز تصویری انتخاب نکردی.<br>اولین عکس را اضافه کن تا شروع کنیم!</span></div>
+ <div class="convert-wrap">
+  <button class="btn primary convert" id="convert" disabled>✦ ساخت PDF و دانلود</button>
+  <div class="progress" id="progress"><div id="bar"></div></div><div class="status" id="status" aria-live="polite"></div>
+ </div>
+</section>
+<aside class="sidebar">
+ <section class="sidecard">
+  <div class="side-title"><i>⚙</i> <span id="pageSettingsTitle">تنظیمات صفحه</span></div>
+  <div class="field"><label id="paperLabel">اندازه کاغذ</label><select id="size"><option value="a4">A4 — استاندارد</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="fit">اندازه متناسب با عکس</option></select></div>
+  <div class="field"><label id="orientationLabel">جهت صفحه</label><div class="seg" id="orientation"><button data-value="portrait" class="active">عمودی</button><button data-value="landscape">افقی</button><button data-value="auto">هوشمند</button><button data-value="auto">خودکار</button></div></div>
+  <div class="field"><label id="marginLabel">حاشیه صفحه</label><select id="margin"><option value="0">بدون حاشیه</option><option value="8">کم</option><option value="15" selected>معمولی</option><option value="25">زیاد</option></select></div>
+  <div class="field"><label id="fitLabel">نحوه قرارگیری عکس</label><select id="fit"><option value="contain">نمایش کامل عکس</option><option value="cover">پر کردن صفحه (برش احتمالی)</option></select></div>
+ </section>
+ <section class="sidecard">
+  <div class="side-title"><i>✧</i> <span id="outputSettingsTitle">تنظیمات خروجی</span></div>
+  <div class="field"><label id="filenameLabel">نام فایل PDF</label><input id="filename" type="text" value="pixora-document" maxlength="60" dir="auto"></div>
+  <div class="field"><label id="qualityLabel">کیفیت تصاویر</label><select id="quality"><option value=".98">بالاترین کیفیت</option><option value=".88" selected>متعادل و پیشنهادی</option><option value=".70">حجم کمتر</option></select></div>
+  <label class="checkrow"><span id="pageNumbersLabel">شماره صفحه در پایین PDF</span><input type="checkbox" id="pageNumbers"></label>
+  <label class="checkrow"><span id="dateStampLabel">تاریخ ساخت در پایین صفحه</span><input type="checkbox" id="dateStamp"></label>
+ </section>
+</aside>
+</main>
+<section class="features">
+ <div class="feature"><span class="ico">🔐</span><div><b>حریم خصوصی واقعی</b><small>عکس‌ها روی دستگاه خودت پردازش می‌شوند.</small></div></div>
+ <div class="feature"><span class="ico">↕️</span><div><b>مدیریت ترتیب صفحات</b><small>جابجایی، چرخش و حذف هر تصویر به‌صورت جداگانه.</small></div></div>
+ <div class="feature"><span class="ico">⚡</span><div><b>خروجی قابل تنظیم</b><small>اندازه صفحه، کیفیت و حاشیه دلخواه خودت را انتخاب کن.</small></div></div>
+</section>
+<footer><span id="footerCopy">© 2026 PIXORA · ساخته‌شده برای تبدیل ساده‌تر</span><span><span id="footerContact">پشتیبانی و پیشنهادها:</span> <a class="contact" href="mailto:cooperx404.github.@gmail.com">cooperx404.github.@gmail.com</a></span></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+
+const translations={
+ fa:{
+  privacy:'✦ خصوصی و امن · بدون آپلود',day:'☀️ حالت روز',night:'🌙 حالت شب',language:'🇬🇧 English',
+  brand:'IMAGE TO PDF STUDIO',eyebrow:'ابزار هوشمند تبدیل تصویر',hero:'عکس‌هات، یک PDF <span class="gradient">حرفه‌ای</span>',
+  description:'چند عکس را وارد کن، مرتب کن، تنظیمات دلخواهت را انتخاب کن و در چند ثانیه یک PDF تمیز تحویل بگیر.',
+  workspace:'فضای ساخت PDF',workspaceSub:'تصاویرت را اضافه و مدیریت کن',dropTitle:'تصاویر را اینجا رها کن',
+  dropDescription:'یا از دستگاهت انتخاب کن · JPG / PNG / WEBP',choose:'＋ انتخاب تصاویر',listTitle:'فهرست تصاویر',
+  listSub:'با فلش‌ها ترتیب صفحات را تغییر بده',sort:'مرتب‌سازی نام',clear:'حذف همه',
+  empty:'هنوز تصویری انتخاب نکردی.<br>اولین عکس را اضافه کن تا شروع کنیم!',convert:'✦ ساخت PDF و دانلود',
+  pageSettings:'تنظیمات صفحه',outputSettings:'تنظیمات خروجی',paper:'اندازه کاغذ',orientation:'جهت صفحه',
+  margin:'حاشیه صفحه',fit:'نحوه قرارگیری عکس',filename:'نام فایل PDF',quality:'کیفیت تصاویر',
+  pageNumbers:'شماره صفحه در پایین PDF',dateStamp:'تاریخ ساخت در پایین صفحه',
+  footer:'© 2026 PIXORA · ساخته‌شده برای تبدیل ساده‌تر',contact:'پشتیبانی و پیشنهادها:',
+  paperOptions:['A4 — استاندارد','Letter','Legal','اندازه متناسب با عکس'],
+  orientationOptions:['عمودی','افقی','هوشمند','خودکار'],
+  marginOptions:['بدون حاشیه','کم','معمولی','زیاد'],
+  fitOptions:['نمایش کامل عکس','پر کردن صفحه (برش احتمالی)'],
+  qualityOptions:['بالاترین کیفیت','متعادل و پیشنهادی','حجم کمتر'],
+  selected:n=>`${n} تصویر`,page:n=>`صفحه ${n}`,unsupported:'فرمت تصویر پشتیبانی نمی‌شود.',
+  added:n=>`${n} تصویر اضافه شد.`,cleared:'فهرست تصاویر پاک شد.',sorted:'تصاویر بر اساس نام مرتب شدند.',
+  libraryMissing:tr('libraryMissing'),
+  preparing:tr('preparing'),building:(a,b)=>`در حال ساخت صفحه ${a} از ${b}...`,
+  ready:tr('ready'),success:tr('success'),
+  failed:tr('failed'),failedToast:tr('failedToast')
+ },
+ en:{
+  privacy:'✦ Private & secure · No upload',day:'☀️ Light Mode',night:'🌙 Dark Mode',language:'🇮🇷 فارسی',
+  brand:'IMAGE TO PDF STUDIO',eyebrow:'Smart image conversion tool',hero:'Your photos, one <span class="gradient">professional</span> PDF',
+  description:'Add multiple photos, arrange them, choose your settings, and create a polished PDF in seconds.',
+  workspace:'PDF Workspace',workspaceSub:'Add and manage your images',dropTitle:'Drop images here',
+  dropDescription:'Or choose from your device · JPG / PNG / WEBP',choose:'＋ Choose Images',listTitle:'Image List',
+  listSub:'Use the arrows to change page order',sort:'Sort by name',clear:'Remove all',
+  empty:'No images selected yet.<br>Add your first image to get started!',convert:'✦ Create & Download PDF',
+  pageSettings:'Page Settings',outputSettings:'Output Settings',paper:'Paper size',orientation:'Orientation',
+  margin:'Page margin',fit:'Image placement',filename:'PDF file name',quality:'Image quality',
+  pageNumbers:'Page numbers at the bottom',dateStamp:'Creation date at the bottom',
+  footer:'© 2026 PIXORA · Made to make conversion easier',contact:'Support & suggestions:',
+  paperOptions:['A4 — Standard','Letter','Legal','Fit to image'],
+  orientationOptions:['Portrait','Landscape','Smart','Auto'],
+  marginOptions:['No margin','Small','Normal','Large'],
+  fitOptions:['Fit entire image','Fill page (may crop)'],
+  qualityOptions:['Highest quality','Balanced (recommended)','Smaller file'],
+  selected:n=>`${n} image(s)`,page:n=>`Page ${n}`,unsupported:'This image format is not supported.',
+  added:n=>`${n} image(s) added.`,cleared:'Image list cleared.',sorted:'Images sorted by name.',
+  libraryMissing:'PDF library did not load; check your internet connection.',
+  preparing:'Preparing images...',building:(a,b)=>`Creating page ${a} of ${b}...`,
+  ready:'PDF is ready; download started ✨',success:'PDF created successfully.',
+  failed:'Could not create PDF. Please try again.',failedToast:'PDF creation failed.'
+ }
+};
+let currentLanguage=localStorage.getItem('pixora-language')||'fa';
+let currentTheme=localStorage.getItem('pixora-theme')||'dark';
+function tr(key,...args){const value=translations[currentLanguage][key];return typeof value==='function'?value(...args):value}
+function setLanguage(lang){
+ currentLanguage=lang;localStorage.setItem('pixora-language',lang);
+ document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+ const ids={privacyBadge:'privacy',brandSubtitle:'brand',eyebrowText:'eyebrow',heroTitle:'hero',heroDescription:'description',
+ workspaceTitle:'workspace',workspaceSub:'workspaceSub',dropTitle:'dropTitle',dropDescription:'dropDescription',
+ choose:'choose',listTitle:'listTitle',listSub:'listSub',sort:'sort',clear:'clear',emptyText:'empty',
+ convert:'convert',pageSettingsTitle:'pageSettings',outputSettingsTitle:'outputSettings',
+ paperLabel:'paper',orientationLabel:'orientation',marginLabel:'margin',fitLabel:'fit',
+ filenameLabel:'filename',qualityLabel:'quality',pageNumbersLabel:'pageNumbers',dateStampLabel:'dateStamp',
+ footerCopy:'footer',footerContact:'contact'};
+ Object.entries(ids).forEach(([id,key])=>{const el=$(id);if(el)el.innerHTML=tr(key)});
+ const selectOptions={size:'paperOptions',margin:'marginOptions',fit:'fitOptions',quality:'qualityOptions'};
+ Object.entries(selectOptions).forEach(([id,key])=>[...$(id).options].forEach((o,i)=>o.textContent=tr(key)[i]));
+ [...$('orientation').querySelectorAll('button')].forEach((b,i)=>b.textContent=tr('orientationOptions')[i]);
+ $('languageToggle').textContent=tr('language');updateThemeButton();
+ render();
+}
+function setTheme(theme){
+ currentTheme=theme;localStorage.setItem('pixora-theme',theme);
+ document.body.classList.toggle('light',theme==='light');
+ $('themeToggle').textContent=theme==='dark'?translations[currentLanguage].day:translations[currentLanguage].night;
+}
+function updateThemeButton(){setTheme(currentTheme)}
+$('languageToggle').addEventListener('click',()=>setLanguage(currentLanguage==='fa'?'en':'fa'));
+$('themeToggle').addEventListener('click',()=>setTheme(currentTheme==='dark'?'light':'dark'));
+
+const $=id=>document.getElementById(id),input=$('files'),drop=$('drop');let photos=[],orientation='portrait';
+const fa=n=>currentLanguage==='fa'?String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]):String(n);
+function toast(s){const t=$('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
+$('choose').onclick=e=>{e.stopPropagation();input.click()};drop.onclick=e=>{if(e.target.id!=='choose')input.click()};
+input.onchange=e=>{addFiles(e.target.files);input.value=''};
+['dragenter','dragover'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.remove('over')}));
+drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
+function addFiles(list){let arr=[...list].filter(f=>['image/jpeg','image/png','image/webp'].includes(f.type));if(!arr.length){toast(tr('unsupported'));return}
+ arr.forEach(file=>photos.push({file,url:URL.createObjectURL(file),name:file.name,rotation:0}));render();toast(tr('added',fa(arr.length)))}
+function render(){
+ $('grid').innerHTML='';$('empty').style.display=photos.length?'none':'block';$('counter').textContent=fa(photos.length)+(currentLanguage==='fa'?' تصویر':' image(s)');
+ ['convert','clear','sort'].forEach(id=>$(id).disabled=!photos.length);
+ photos.forEach((p,i)=>{let card=document.createElement('article');card.className='photo';
+ let img=document.createElement('img');img.src=p.url;img.style.transform=`rotate(${p.rotation}deg)`;
+ let idx=document.createElement('span');idx.className='index';idx.textContent=tr('page',fa(i+1));
+ let name=document.createElement('div');name.className='filename';name.textContent=p.name;name.title=p.name;
+ let actions=document.createElement('div');actions.className='photo-actions';
+ const mk=(label,fn,disabled=false,cls='soft')=>{let b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.disabled=disabled;b.onclick=fn;return b};
+ actions.append(mk('↑',()=>move(i,-1),i===0),mk('↓',()=>move(i,1),i===photos.length-1),mk('↻',()=>{p.rotation=(p.rotation+90)%360;render()}),mk('×',()=>{URL.revokeObjectURL(p.url);photos.splice(i,1);render()},false,'remove'));
+ card.append(img,idx,name,actions);$('grid').append(card)});
+}
+function move(i,d){let j=i+d;if(j<0||j>=photos.length)return;[photos[i],photos[j]]=[photos[j],photos[i]];render()}
+$('clear').onclick=()=>{photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];render();toast(tr('cleared'))};
+$('sort').onclick=()=>{photos.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));render();toast(tr('sorted'))};
+$('orientation').querySelectorAll('button').forEach(b=>b.onclick=()=>{orientation=b.dataset.value;$('orientation').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b))});
+function loadImage(src){return new Promise((res,rej)=>{let im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=src})}
+function makeCanvas(img,rotation,quality){let swap=rotation%180!==0,c=document.createElement('canvas');c.width=swap?img.height:img.width;c.height=swap?img.width:img.height;let ctx=c.getContext('2d');ctx.translate(c.width/2,c.height/2);ctx.rotate(rotation*Math.PI/180);ctx.drawImage(img,-img.width/2,-img.height/2);return {data:c.toDataURL('image/jpeg',quality),w:c.width,h:c.height}}
+$('convert').onclick=async()=>{
+ if(!photos.length)return;if(!window.jspdf){$('status').textContent=tr('libraryMissing');return}
+ let btn=$('convert'),progress=$('progress'),bar=$('bar');btn.disabled=true;progress.style.display='block';$('status').textContent=tr('preparing');
+ try{
+ const {jsPDF}=window.jspdf,size=$('size').value,margin=Number($('margin').value),quality=Number($('quality').value),fit=$('fit').value;
+ let pdf=null;
+ for(let i=0;i<photos.length;i++){
+  let p=photos[i],img=await loadImage(p.url),c=makeCanvas(img,p.rotation,quality);
+  let ori=orientation==='auto'?(c.w>c.h?'landscape':'portrait'):orientation;
+  let format=size==='fit'?[c.w*.264583,c.h*.264583]:size;
+  if(size==='fit')ori=c.w>c.h?'landscape':'portrait';
+  if(!pdf)pdf=new jsPDF({orientation:ori,unit:'mm',format,compress:true});
+  else pdf.addPage(format,ori);
+  let pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight(),uw=Math.max(1,pw-2*margin),uh=Math.max(1,ph-2*margin);
+  let scale=fit==='cover'?Math.max(uw/c.w,uh/c.h):Math.min(uw/c.w,uh/c.h),w=c.w*scale,h=c.h*scale;
+  let x=(pw-w)/2,y=(ph-h)/2;
+  if(fit==='cover'){
+   // Crop the oversized image to the page bounds using a temporary page-sized canvas.
+   let out=document.createElement('canvas'),ratio=2;out.width=Math.round(uw*ratio*3.78);out.height=Math.round(uh*ratio*3.78);
+   let ox=out.getContext('2d'),dw=out.width,dh=out.height,s=Math.max(dw/c.w,dh/c.h);ox.drawImage(img,0,0); // overwritten below with rotated source
+   let rotated=document.createElement('canvas');rotated.width=c.w;rotated.height=c.h;let rx=rotated.getContext('2d');rx.drawImage(await loadImage(c.data),0,0);
+   ox.clearRect(0,0,dw,dh);ox.drawImage(rotated,(dw-c.w*s)/2,(dh-c.h*s)/2,c.w*s,c.h*s);
+   pdf.addImage(out.toDataURL('image/jpeg',quality),'JPEG',margin,margin,uw,uh,undefined,'FAST');
+  }else pdf.addImage(c.data,'JPEG',x,y,w,h,undefined,'FAST');
+  if($('pageNumbers').checked||$('dateStamp').checked){pdf.setFontSize(8);pdf.setTextColor(125,139,158);let label=[];if($('pageNumbers').checked)label.push(`${i+1} / ${photos.length}`);if($('dateStamp').checked)label.push(new Date().toLocaleDateString('fa-IR'));pdf.text(label.join('  •  '),pw/2,ph-4,{align:'center'});}
+  bar.style.width=((i+1)/photos.length*100)+'%';$('status').textContent=tr('building',fa(i+1),fa(photos.length));
+ }
+ let filename=$('filename').value.trim().replace(/[\\/:*?"<>|]/g,'-')||'pixora-document';pdf.save(filename+'.pdf');$('status').textContent=tr('ready');toast(tr('success'));
+ }catch(err){console.error(err);$('status').textContent=tr('failed');toast(tr('failedToast'))}
+ finally{btn.disabled=!photos.length;setTimeout(()=>{progress.style.display='none';bar.style.width='0'},1800)}
+};
+setLanguage(currentLanguage);
+setTheme(currentTheme);
+</script>
+</body></html>
